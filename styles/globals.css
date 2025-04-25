@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 47% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 262 83% 58%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 47% 50%;
+
+    --radius: 0.75rem;
+
+    --chart-1: 222 47% 50%;
+    --chart-2: 262 83% 58%;
+    --chart-3: 326 100% 60%;
+    --chart-4: 180 100% 40%;
+    --chart-5: 30 100% 60%;
+
+    --sidebar-background: 210 40% 98%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 222 47% 50%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 262 83% 58%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 222 47% 50%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 14%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 222 47% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 262 83% 58%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+
+    --chart-1: 222 47% 60%;
+    --chart-2: 262 83% 68%;
+    --chart-3: 326 100% 70%;
+    --chart-4: 180 100% 50%;
+    --chart-5: 30 100% 70%;
+
+    --sidebar-background: 222 47% 14%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 222 47% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 262 83% 68%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom components styling */
+@layer components {
+  /* Dashboard layout */
+  .dashboard-layout {
+    @apply grid min-h-screen;
+    grid-template-areas:
+      "sidebar header"
+      "sidebar main";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .dashboard-sidebar {
+    @apply fixed top-0 bottom-0 left-0 z-30 w-64 transition-all duration-300 ease-in-out;
+    grid-area: sidebar;
+  }
+
+  .dashboard-sidebar.collapsed {
+    @apply w-16;
+  }
+
+  .dashboard-header {
+    @apply sticky top-0 z-20 h-16;
+    grid-area: header;
+  }
+
+  .dashboard-main {
+    @apply p-6 overflow-auto;
+    grid-area: main;
+    margin-left: 16rem;
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+  .collapsed ~ .dashboard-main {
+    margin-left: 4rem;
+  }
+
+  /* Sidebar items */
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent/10 hover:text-sidebar-accent transition-colors;
+  }
+
+  .sidebar-item.active {
+    @apply bg-sidebar-accent text-sidebar-accent-foreground;
+  }
+
+  .sidebar-item-collapsed {
+    @apply flex items-center justify-center p-2 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent/10 hover:text-sidebar-accent transition-colors;
+  }
+
+  .sidebar-item-collapsed.active {
+    @apply bg-sidebar-accent text-sidebar-accent-foreground;
+  }
+
+  /* Task card */
+  .task-card {
+    @apply bg-card rounded-xl border border-border/50 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden;
+  }
+
+  .task-card-header {
+    @apply flex items-center justify-between p-4 border-b border-border/50;
+  }
+
+  .task-card-content {
+    @apply p-4 cursor-pointer;
+  }
+
+  .task-card-footer {
+    @apply flex items-center justify-between p-4 bg-muted/30;
+  }
+
+  /* Priority colors */
+  .priority-high {
+    @apply bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20;
+  }
+
+  .priority-medium {
+    @apply bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20;
+  }
+
+  .priority-low {
+    @apply bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20;
+  }
+
+  /* Insight cards */
+  .insight-card {
+    @apply relative overflow-hidden rounded-xl bg-gradient-to-br from-card to-card/80 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .insight-card::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-50;
+  }
+
+  .insight-card::after {
+    content: "";
+    @apply absolute -inset-0.5 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 opacity-0 blur-sm transition duration-300;
+  }
+
+  .insight-card:hover::after {
+    @apply opacity-100;
+  }
+
+  .insight-card-content {
+    @apply relative z-10 p-6;
+  }
+
+  .insight-card-header {
+    @apply flex items-center justify-between mb-4;
+  }
+
+  .insight-card-title {
+    @apply text-lg font-semibold;
+  }
+
+  .insight-card-icon {
+    @apply h-10 w-10 rounded-full flex items-center justify-center;
+  }
+
+  .insight-card-value {
+    @apply text-3xl font-bold;
+  }
+
+  .insight-card-description {
+    @apply text-sm text-muted-foreground mt-2;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  /* Progress bar animation */
+  @keyframes progressFill {
+    from {
+      width: 0;
+    }
+    to {
+      width: var(--progress-value);
+    }
+  }
+
+  .animate-progress {
+    animation: progressFill 1s ease-out forwards;
+  }
+}
